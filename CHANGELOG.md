@@ -1,5 +1,12 @@
 # rsshub-never-die
 
+## [1.0.1](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.0.0...v1.0.1) (2024-10-24)
+
+
+### 🐛 Bug 修复
+
+* 增加 AUTH_KEY 配置；修复 fetch 未抛出异常的问题；更新文档 ([84fdfda](https://github.com/CaoMeiYouRen/rsshub-never-die/commit/84fdfda))
+
 # 1.0.0 (2024-10-24)
 
 
