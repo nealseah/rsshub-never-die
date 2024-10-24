@@ -2,9 +2,9 @@ version: "3"
 
 services:
   server:
-    build: .
-    # container_name: 'push-all-in-cloud'
-    # image: ${DOCKER_IMAGE:-caomeiyouren/push-all-in-cloud}
+    # build: .
+    container_name: 'rsshub-never-die'
+    image: ${DOCKER_IMAGE:-caomeiyouren/rsshub-never-die}
     restart: always
     ports:
       - "3000:3000"
