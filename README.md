@@ -27,42 +27,174 @@
 ## 📦 依赖要求
 
 
-- node >=16
+- node >=18
 
-## 🚀 安装
+## 🚀 部署
+
+### Cloudflare Workers 部署
+
+1. 修改 `wrangler.toml` 配置文件。
+
+```toml
+name = "rsshub-never-die"
+main = "dist/app.mjs"
+minify = true
+compatibility_date = "2024-10-20"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# 超时时间(ms)
+TIMEOUT = 60000
+# 最大请求体大小(字节)，默认 100MB
+MAX_BODY_SIZE = 104857600
+# 缓存时间(秒)
+CACHE_MAX_AGE = 300
+# RSSHub 实例 的 URL 地址，，使用英文逗号分隔。
+# 官方实例 https://rsshub.app 不用列出，默认添加。
+RSSHUB_NODE_URLS = 'https://rsshub.rssforever.com, https://hub.slarker.me, https://rsshub.pseudoyu.com, https://rsshub.ktachibana.party, https://rsshub.woodland.cafe, https://rss.owo.nz, https://yangzhi.app, https://rsshub.henry.wang, https://rss.peachyjoy.top, https://rsshub.speednet.icu'
+
+```
+
+2. 构建并部署到 `Cloudflare Workers`
 
 ```sh
-npm install
+npm run build && npm run deploy:wrangler
 ```
+
+### Vercel 部署
+
+点击以下按钮一键部署到 Vercel。
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCaoMeiYouRen%2Frsshub-never-die.git)
+
+### Docker 镜像
+
+支持两种注册表：
+
+- Docker Hub: [`caomeiyouren/rsshub-never-die`](https://hub.docker.com/r/caomeiyouren/rsshub-never-die)
+- GitHub: [`ghcr.io/caomeiyouren/rsshub-never-die`](https://github.com/CaoMeiYouRen/rsshub-never-die/pkgs/container/rsshub-never-die)
+
+支持以下架构：
+
+- `linux/amd64`
+- `linux/arm64`
+
+有以下几种 tags：
+
+| Tag            | 描述     | 举例          |
+| :------------- | :------- | :------------ |
+| `latest`       | 最新     | `latest`      |
+| `{YYYY-MM-DD}` | 特定日期 | `2024-06-07`  |
+| `{sha-hash}`   | 特定提交 | `sha-0891338` |
+| `{version}`    | 特定版本 | `1.2.3`       |
+
+### Docker Compose 部署
+
+下载 [docker-compose.yml](https://github.com/CaoMeiYouRen/rsshub-never-die/blob/master/docker-compose.yml)
+
+```sh
+wget https://raw.githubusercontent.com/CaoMeiYouRen/rsshub-never-die/refs/heads/master/docker-compose.yml
+```
+
+检查有无需要修改的配置
+
+```sh
+vim docker-compose.yml  # 也可以是你喜欢的编辑器
+```
+> 在 `docker-compose.yml` 文件中修改 `RSSHUB_NODE_URLS` 字段即可修改 RSSHub 实例地址。
+
+启动
+
+```sh
+docker-compose up -d
+```
+
+在浏览器中打开 `http://{Server IP}:3000` 即可查看结果
+
+### Node.js 部署
+
+确保本地已安装 Node.js 和 pnpm。
+
+```sh
+# 下载源码
+git clone https://github.com/CaoMeiYouRen/rsshub-never-die.git  --depth=1
+cd rsshub-never-die
+# 安装依赖
+pnpm i --frozen-lockfile
+# 构建项目
+pnpm build
+# 启动项目
+pnpm start
+```
+
+在浏览器中打开 `http://{Server IP}:3000` 即可查看结果。
+
+> 在 `.env` 文件中修改 `RSSHUB_NODE_URLS` 字段即可修改 RSSHub 实例地址。
 
 ## 👨‍💻 使用
 
-```sh
-npm run start
+直接将原本的 `rsshub.app` 域名替换为部署的域名即可。
+
+例如：
+
+如果基础路径为 `https://example.vercel.app`，则原本
+
+ `https://rsshub.app/github/activity/CaoMeiYouRen` 
+
+路由的地址就是
+
+`https://example.vercel.app/github/activity/CaoMeiYouRen`
+
+### 配置项
+
+```ini
+# 运行端口
+PORT=3000
+
+# 超时时间(ms)
+# 如果在 vercel 中运行，则还要修改 vercel.json 中的 maxDuration 字段(单位：秒)
+TIMEOUT=60000
+
+NODEJS_HELPERS=0
+# 是否写入日志到文件
+LOGFILES=false
+
+# 日志级别
+# LOG_LEVEL=http
+
+# 最大请求体大小(字节)，默认 100MB
+# MAX_BODY_SIZE=104857600
+
+# RSSHub 实例 的 URL 地址，，使用英文逗号分隔。
+# 官方实例 https://rsshub.app 不用列出，默认添加。
+RSSHUB_NODE_URLS='https://rsshub.rssforever.com, https://hub.slarker.me, https://rsshub.pseudoyu.com, https://rsshub.ktachibana.party, https://rsshub.woodland.cafe, https://rss.owo.nz, https://yangzhi.app, https://rsshub.henry.wang, https://rss.peachyjoy.top, https://rsshub.speednet.icu'
+
+# 缓存时间(秒)
+CACHE_MAX_AGE=300
 ```
 
 ## 🛠️ 开发
 
 ```sh
-npm run dev
+pnpm run dev
 ```
 
 ## 🔧 编译
 
 ```sh
-npm run build
+pnpm run build
 ```
 
 ## 🔍 Lint
 
 ```sh
-npm run lint
+pnpm run lint
 ```
 
 ## 💾 Commit
 
 ```sh
-npm run commit
+pnpm run commit
 ```
 
 
