@@ -7,4 +7,5 @@ export type Bindings = {
     MAX_BODY_SIZE: string
     RSSHUB_NODE_URLS: string
     CACHE_MAX_AGE: string
+    AUTH_KEY: string
 }

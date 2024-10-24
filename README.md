@@ -31,6 +31,8 @@
 
 ## 🚀 部署
 
+> 你可以在这里找到[更多公共实例](https://docs.rsshub.app/zh/guide/instances#公共实例)
+
 ### Cloudflare Workers 部署
 
 1. 修改 `wrangler.toml` 配置文件。
@@ -52,6 +54,9 @@ CACHE_MAX_AGE = 300
 # RSSHub 实例 的 URL 地址，，使用英文逗号分隔。
 # 官方实例 https://rsshub.app 不用列出，默认添加。
 RSSHUB_NODE_URLS = 'https://rsshub.rssforever.com, https://hub.slarker.me, https://rsshub.pseudoyu.com, https://rsshub.ktachibana.party, https://rsshub.woodland.cafe, https://rss.owo.nz, https://yangzhi.app, https://rsshub.henry.wang, https://rss.peachyjoy.top, https://rsshub.speednet.icu'
+# 访问码，注意和 RSSHub 的 ACCESS_KEY 不是同一个。
+# 留空则不做限制
+AUTH_KEY=''
 
 ```
 
@@ -171,7 +176,27 @@ RSSHUB_NODE_URLS='https://rsshub.rssforever.com, https://hub.slarker.me, https:/
 
 # 缓存时间(秒)
 CACHE_MAX_AGE=300
+
+# 访问码，注意和 RSSHub 的 ACCESS_KEY 不是同一个。
+# 留空则不做限制
+AUTH_KEY=''
 ```
+
+## 📚FAQ
+
+### 1. 在什么情况下应该使用本项目？
+
+**适用情况：**
+
+- **自动容错：**默认情况下，本项目会从提供的 RSSHub 实例节点中随机挑选 5 个，加上官方实例，共计 6 个节点，并发请求，并返回最快**成功**的那个响应。即便有部分实例失效，也可以从其他正常的实例中返回最快的结果。
+- **不需要配置项的路由：**对于所有不需要配置项的路由，均可以正常访问。
+- **反向代理：**由于一些原因，你可能无法访问部分 RSSHub 实例，通过本项目作为代理，你可以正常访问到有效的 RSSHub 实例（需要准备一个有效的域名）。
+
+### 2. 在什么情况下本项目不适用？
+
+**不适用情况：**
+
+- **需要配置项的路由：**对于部分需要配置项才能正常工作的路由，由于公共实例并未提供相关配置，故这些路由均无法正常工作。
 
 ## 🛠️ 开发
 

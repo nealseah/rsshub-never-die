@@ -1,16 +1,22 @@
 import { Hono } from 'hono'
 import { env } from 'hono/adapter'
 import { StatusCode } from 'hono/utils/http-status'
+import { HTTPException } from 'hono/http-exception'
 import { Bindings } from '../types'
-import { parseNodeUrls, randomPick } from '@/utils/helper'
+import { fetchWithStatusCheck, parseNodeUrls, randomPick } from '@/utils/helper'
 
 const app = new Hono<{ Bindings: Bindings }>()
 
 app.get('*', async (c) => {
-    const { RSSHUB_NODE_URLS } = env(c)
-    const allNodeUrls = parseNodeUrls(RSSHUB_NODE_URLS)
+    const { RSSHUB_NODE_URLS, AUTH_KEY } = env(c)
     const path = c.req.path
     const query = c.req.query()
+    const { authKey } = query
+    if (AUTH_KEY && authKey !== AUTH_KEY) {
+        throw new HTTPException(403, { message: 'Forbidden' })
+    }
+    const allNodeUrls = parseNodeUrls(RSSHUB_NODE_URLS)
+
     // 由于 Cloudflare Workers 的限制，fetch 一次最多并发 6 个，所以最多随机选择 5 个节点。
     // 添加默认节点，官方实例默认为第一个。
     // 随机选择5个节点，不包括默认节点。
@@ -21,7 +27,7 @@ app.get('*', async (c) => {
         return _url.toString()
     })
     // 并发请求，有一个成功就返回值
-    const res = await Promise.any(nodeUrls.map((url) => fetch(url)))
+    const res = await Promise.any(nodeUrls.map((url) => fetchWithStatusCheck(url)))
     const data = await res.text()
     const contentType = res.headers.get('Content-Type') || 'application/xml'
     c.header('Content-Type', contentType)
