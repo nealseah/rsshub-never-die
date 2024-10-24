@@ -6,4 +6,5 @@ export type Bindings = {
     TIMEOUT: string
     MAX_BODY_SIZE: string
     RSSHUB_NODE_URLS: string
+    CACHE_MAX_AGE: string
 }
