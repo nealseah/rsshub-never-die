@@ -28,13 +28,13 @@ app.use(secureHeaders())
 app.onError(errorhandler)
 app.notFound(notFoundHandler)
 
-app.all('/', (c) => c.json({
-    message: 'Hello Hono!',
-}))
+// app.all('/', (c) => c.json({
+//     message: 'Hello Hono!',
+// }))
 
-app.all('/runtime', (c) => c.json({
-    runtime: getRuntimeKey(),
-}))
+// app.all('/runtime', (c) => c.json({
+//     runtime: getRuntimeKey(),
+// }))
 
 app.route('/', routes)
 

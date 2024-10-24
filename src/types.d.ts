@@ -5,4 +5,5 @@ export type Bindings = {
     LOG_LEVEL: string
     TIMEOUT: string
     MAX_BODY_SIZE: string
+    RSSHUB_NODE_URLS: string
 }
