@@ -1,5 +1,4 @@
 import { Hono } from 'hono'
-import fetch from 'isomorphic-unfetch'
 import { env } from 'hono/adapter'
 import { StatusCode } from 'hono/utils/http-status'
 import { Bindings } from '../types'
