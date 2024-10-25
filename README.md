@@ -56,6 +56,7 @@ CACHE_MAX_AGE = 300
 RSSHUB_NODE_URLS = 'https://rsshub.rssforever.com, https://hub.slarker.me, https://rsshub.pseudoyu.com, https://rsshub.ktachibana.party, https://rsshub.woodland.cafe, https://rss.owo.nz, https://yangzhi.app, https://rsshub.henry.wang, https://rss.peachyjoy.top, https://rsshub.speednet.icu'
 # 访问码，注意和 RSSHub 的 ACCESS_KEY 不是同一个。
 # 留空则不做限制
+# 启用后，在url中添加 authKey 参数即可，例如 authKey=yyyy
 AUTH_KEY=''
 
 ```

@@ -3,7 +3,7 @@ import { env } from 'hono/adapter'
 import { StatusCode } from 'hono/utils/http-status'
 import { HTTPException } from 'hono/http-exception'
 import { Bindings } from '../types'
-import { fetchWithStatusCheck, parseNodeUrls, randomPick } from '@/utils/helper'
+import { fetchWithStatusCheck, md5, parseNodeUrls, randomPick } from '@/utils/helper'
 
 const app = new Hono<{ Bindings: Bindings }>()
 
@@ -11,9 +11,15 @@ app.get('*', async (c) => {
     const { RSSHUB_NODE_URLS, AUTH_KEY } = env(c)
     const path = c.req.path
     const query = c.req.query()
-    const { authKey } = query
-    if (AUTH_KEY && authKey !== AUTH_KEY) {
-        throw new HTTPException(403, { message: 'Forbidden' })
+    const { authKey, authCode, ...otherQuery } = query
+    if (AUTH_KEY) {
+        if (authKey && authKey !== AUTH_KEY) { // 支持通过 authKey 验证
+            throw new HTTPException(403, { message: 'Auth key is invalid' })
+        }
+        const code = md5(path + AUTH_KEY)
+        if (authCode && authCode !== code) { // 支持通过 authCode 验证
+            throw new HTTPException(403, { message: 'Auth code is invalid' })
+        }
     }
     const allNodeUrls = parseNodeUrls(RSSHUB_NODE_URLS)
 
@@ -23,7 +29,7 @@ app.get('*', async (c) => {
     const nodeUrls = ['https://rsshub.app', ...randomPick(allNodeUrls, 5)].map((url) => {
         const _url = new URL(url)
         _url.pathname = path
-        _url.search = new URLSearchParams(query).toString()
+        _url.search = new URLSearchParams(otherQuery).toString()
         return _url.toString()
     })
     // 并发请求，有一个成功就返回值
