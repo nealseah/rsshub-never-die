@@ -1,5 +1,12 @@
 # rsshub-never-die
 
+# [1.1.0](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.0.2...v1.1.0) (2024-11-02)
+
+
+### ✨ 新功能
+
+* 新增 运行模式 配置。支持 负载均衡、自动容灾、快速响应等三种模式 ([1604bff](https://github.com/CaoMeiYouRen/rsshub-never-die/commit/1604bff))
+
 ## [1.0.2](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.0.1...v1.0.2) (2024-10-25)
 
 
