@@ -8,4 +8,6 @@ export type Bindings = {
     RSSHUB_NODE_URLS: string
     CACHE_MAX_AGE: string
     AUTH_KEY: string
+    // 运行模式：负载均衡/自动容灾/快速响应
+    MODE: 'loadbalance' | 'failover' | 'quickresponse'
 }

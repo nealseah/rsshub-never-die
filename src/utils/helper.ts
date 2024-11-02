@@ -24,7 +24,6 @@ export function parseNodeUrls(value: string) {
     return [...new Set(value.split(',')
         .map((url) => url.trim())),
     ] // 去重
-        .map((url) => new URL(url).toString()) // 格式化 URL
 }
 
 /**
