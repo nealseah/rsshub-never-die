@@ -1,5 +1,12 @@
 # rsshub-never-die
 
+## [1.0.2](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.0.1...v1.0.2) (2024-10-25)
+
+
+### 🐛 Bug 修复
+
+* 增加 authCode 验证逻辑；修复部分情况下摇树优化错误的问题 ([004e4ff](https://github.com/CaoMeiYouRen/rsshub-never-die/commit/004e4ff))
+
 ## [1.0.1](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.0.0...v1.0.1) (2024-10-24)
 
 
