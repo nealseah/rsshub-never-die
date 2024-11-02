@@ -30,7 +30,7 @@ AUTH_KEY = ''
 # 快速响应模式下，会增加背后实例的负载。
 # 默认为负载均衡模式
 # 可选值：loadbalance, failover, quickresponse
-# MODE = 'quickresponse'
+# MODE = 'loadbalance'
 
 [env.dev]
 # Development 环境配置
