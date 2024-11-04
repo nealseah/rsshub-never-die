@@ -35,6 +35,14 @@
 
 ### Cloudflare Workers 部署
 
+#### 一键部署
+
+点击下方按钮一键部署到 Cloudflare Workers
+
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/CaoMeiYouRen/rsshub-never-die)
+
+#### 手动部署
+
 1. 修改 `wrangler.toml` 配置文件。
 
 ```toml
@@ -78,7 +86,7 @@ npm run build && npm run deploy:wrangler
 
 ### Vercel 部署
 
-点击以下按钮一键部署到 Vercel。
+点击下方按钮一键部署到 Vercel。
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCaoMeiYouRen%2Frsshub-never-die.git)
 
