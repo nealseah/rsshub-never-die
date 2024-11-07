@@ -49,7 +49,7 @@
     "@types/node": "^22.8.6",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "@vercel/nft": "^0.27.5",
+    "@vercel/nft": "^0.27.6",
     "commitizen": "^4.3.1",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog-cmyr-config": "^2.1.2",
@@ -68,7 +68,7 @@
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vercel": "^37.14.0",
-    "wrangler": "^3.84.1"
+    "wrangler": "^3.85.0"
   },
   "config": {
     "commitizen": {
