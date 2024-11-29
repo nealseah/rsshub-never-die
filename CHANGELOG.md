@@ -1,5 +1,12 @@
 # rsshub-never-die
 
+## [1.1.1](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.1.0...v1.1.1) (2024-11-16)
+
+
+### 🐛 Bug 修复
+
+* 修复 outputDirectory 路径错误 ([f2c5a3a](https://github.com/CaoMeiYouRen/rsshub-never-die/commit/f2c5a3a))
+
 # [1.1.0](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.0.2...v1.1.0) (2024-11-02)
 
 
