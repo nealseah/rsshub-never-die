@@ -1,6 +1,9 @@
 <h1 align="center">rsshub-never-die </h1>
 <p>
   <img alt="Version" src="https://img.shields.io/github/package-json/v/CaoMeiYouRen/rsshub-never-die.svg" />
+  <a href="https://hub.docker.com/r/caomeiyouren/rsshub-never-die" target="_blank">
+    <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/caomeiyouren/rsshub-never-die">
+  </a>
   <a href="https://github.com/CaoMeiYouRen/rsshub-never-die/actions?query=workflow%3ARelease" target="_blank">
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/CaoMeiYouRen/rsshub-never-die/release.yml?branch=master">
   </a>
