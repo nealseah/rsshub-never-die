@@ -10,4 +10,5 @@ export type Bindings = {
     AUTH_KEY: string
     // 运行模式：负载均衡/自动容灾/快速响应
     MODE: 'loadbalance' | 'failover' | 'quickresponse'
+    MAX_NODE_NUM: string
 }

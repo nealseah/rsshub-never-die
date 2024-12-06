@@ -31,6 +31,7 @@ AUTH_KEY = ''
 # 默认为负载均衡模式
 # 可选值：loadbalance, failover, quickresponse
 # MODE = 'loadbalance'
+MAX_NODE_NUM = 6
 
 [env.dev]
 # Development 环境配置

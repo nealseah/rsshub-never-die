@@ -10,6 +10,7 @@ const app = new Hono<{ Bindings: Bindings }>()
 
 app.get('*', async (c) => {
     const { RSSHUB_NODE_URLS, AUTH_KEY, MODE = 'loadbalance' } = env(c)
+    const MAX_NODE_NUM = Math.max(parseInt(env(c).MAX_NODE_NUM) || 6, 1) // 最大节点数
     const path = c.req.path
     const query = c.req.query()
     const { authKey, authCode, ...otherQuery } = query
@@ -25,7 +26,7 @@ app.get('*', async (c) => {
     const allNodeUrls = parseNodeUrls(RSSHUB_NODE_URLS)
     // 由于 Cloudflare Workers 的限制，fetch 一次最多并发 6 个，所以最多随机选择 5 个节点。
     // 添加默认节点，官方实例默认为第一个。然后随机选择5个节点（不包括默认节点）。
-    const nodeUrls = ['https://rsshub.app', ...randomPick(allNodeUrls, 5)].map((url) => {
+    const nodeUrls = ['https://rsshub.app', ...randomPick(allNodeUrls, MAX_NODE_NUM - 1)].map((url) => {
         const _url = new URL(url)
         _url.pathname = path
         _url.search = new URLSearchParams(otherQuery).toString()

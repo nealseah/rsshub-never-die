@@ -67,16 +67,13 @@ CACHE_MAX_AGE = 300
 # RSSHub 实例 的 URL 地址，，使用英文逗号分隔。
 # 官方实例 https://rsshub.app 不用列出，默认添加。
 RSSHUB_NODE_URLS = 'https://rsshub.rssforever.com, https://hub.slarker.me, https://rsshub.pseudoyu.com, https://rsshub.ktachibana.party, https://rsshub.woodland.cafe, https://rss.owo.nz, https://yangzhi.app, https://rsshub.henry.wang, https://rss.peachyjoy.top, https://rsshub.speednet.icu'
+# 最大实例节点数，默认为 6
+MAX_NODE_NUM=6
 # 访问码，注意和 RSSHub 的 ACCESS_KEY 不是同一个。
 # 留空则不做限制
 # 启用后，在url中添加 authKey 参数即可，例如 authKey=yyyy
 AUTH_KEY=''
 # 运行模式，有三种模式，负载均衡、自动容灾、快速响应模式
-# 负载均衡：负载均衡模式下，会随机选择一个 RSSHub 实例进行请求。但不管请求成功还是失败，都会返回给客户端。
-# 自动容灾：自动容灾模式下，会随机选择一个 RSSHub 实例进行请求。如果请求成功，则返回给客户端。如果请求失败，则会选择下一个实例进行请求。如果所有实例都失败，则返回给客户端错误。
-# 在自动容灾模式下，由于重新请求需要时间，会增加整体的请求时间。
-# 快速响应：会随机选择多个 RSSHub 实例进行请求。并返回最快的成功响应。如果全部失败，则则返回给客户端错误。
-# 快速响应模式下，会增加背后实例的负载。
 # 默认为负载均衡模式
 # 可选值：loadbalance, failover, quickresponse
 MODE = 'loadbalance'
@@ -196,6 +193,11 @@ LOGFILES=false
 # RSSHub 实例 的 URL 地址，，使用英文逗号分隔。
 # 官方实例 https://rsshub.app 不用列出，默认添加。
 RSSHUB_NODE_URLS='https://rsshub.rssforever.com, https://hub.slarker.me, https://rsshub.pseudoyu.com, https://rsshub.ktachibana.party, https://rsshub.woodland.cafe, https://rss.owo.nz, https://yangzhi.app, https://rsshub.henry.wang, https://rss.peachyjoy.top, https://rsshub.speednet.icu'
+
+# 最大实例节点数，默认为 6
+# Cloudflare Workers 平台限制 fetch 一次最多并发 6 个，总计 50 个子请求。所以快速响应模式下最多 6 个节点，其他模式最多 50 个节点。
+# 其他平台没有限制，以实际情况为准。
+MAX_NODE_NUM=6
 
 # 缓存时间(秒)
 CACHE_MAX_AGE=300
