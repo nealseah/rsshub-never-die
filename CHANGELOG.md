@@ -1,5 +1,12 @@
 # rsshub-never-die
 
+# [1.2.0](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.1.1...v1.2.0) (2024-12-06)
+
+
+### ✨ 新功能
+
+* 添加最大实例节点数配置；更新文档以包含最大实例节点数配置；优化节点选择逻辑以支持最大节点数配置 ([a5b2393](https://github.com/CaoMeiYouRen/rsshub-never-die/commit/a5b2393))
+
 ## [1.1.1](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.1.0...v1.1.1) (2024-11-16)
 
 
