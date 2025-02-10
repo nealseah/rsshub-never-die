@@ -54,6 +54,10 @@ app.get('*', async (c) => {
                 const res = await fetchWithStatusCheck(nodeUrl)
                 const data = await res.text()
                 const contentType = res.headers.get('Content-Type') || 'application/xml'
+                // 判断 contentType 类型，除了首页之外，其他页面返回 HTML 的话判断为错误
+                if (path !== '/' && contentType.includes('text/html')) {
+                    throw new HTTPException(500, { message: 'RSSHub node is failed' })
+                }
                 c.header('Content-Type', contentType)
                 c.status(res.status as StatusCode)
                 return c.body(data)
@@ -70,7 +74,15 @@ app.get('*', async (c) => {
     if (MODE === 'quickresponse') {
         // 快速响应：会随机选择多个 RSSHub 实例进行请求。并返回最快的成功响应。如果全部失败，则则返回给客户端错误。
         // 并发请求，有一个成功就返回值
-        const res = await Promise.any(nodeUrls.map((url) => fetchWithStatusCheck(url)))
+        const res = await Promise.any(nodeUrls.map(async (url) => {
+            const resp = await fetchWithStatusCheck(url)
+            const contentType = resp.headers.get('Content-Type') || 'application/xml'
+            // 判断 contentType 类型，除了首页之外，其他页面返回 HTML 的话判断为错误
+            if (path !== '/' && contentType.includes('text/html')) {
+                throw new HTTPException(500, { message: 'RSSHub node is failed' })
+            }
+            return resp
+        }))
         const data = await res.text()
         const contentType = res.headers.get('Content-Type') || 'application/xml'
         c.header('Content-Type', contentType)
