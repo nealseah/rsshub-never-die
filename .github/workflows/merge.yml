@@ -1,0 +1,38 @@
+name: Auto Merge
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "latest"
+      - name: Setup Node.js@lts environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "pnpm"
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run build
+      - name: Dependabot Auto Merge
+        uses: ahmadnassri/action-dependabot-auto-merge@v2.6.6
+        if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'dependencies')
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          config: ".github/auto-merge.yml"
+          target: "patch"
+          command: "rebase"
+          botName: "dependabot"
+          approve: true

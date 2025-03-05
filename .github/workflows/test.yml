@@ -19,28 +19,6 @@ jobs:
         with:
           node-version: "lts/*"
           cache: "pnpm"
-      - name: Cache Dependency
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            ~/.yarn
-            ~/.cache/pnpm
-            ~/cache
-            !~/cache/exclude
-            **/node_modules
-          key: pnpm-${{ runner.os }}-${{ hashFiles('package.json') }}
-          restore-keys: pnpm-${{ runner.os }}
       - run: pnpm i --frozen-lockfile
       - run: pnpm run lint
       - run: pnpm run build
-      - name: Dependabot Auto Merge
-        uses: ahmadnassri/action-dependabot-auto-merge@v2.6.6
-        if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'dependencies')
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          config: ".github/auto-merge.yml"
-          target: "patch"
-          command: "rebase"
-          botName: "dependabot"
-          approve: true
