@@ -1,5 +1,12 @@
 # rsshub-never-die
 
+## [1.2.1](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.2.0...v1.2.1) (2025-02-10)
+
+
+### 🐛 Bug 修复
+
+* 增强错误处理逻辑，针对非首页返回 HTML 内容的情况抛出 HTTP 异常 ([30ac261](https://github.com/CaoMeiYouRen/rsshub-never-die/commit/30ac261))
+
 # [1.2.0](https://github.com/CaoMeiYouRen/rsshub-never-die/compare/v1.1.1...v1.2.0) (2024-12-06)
 
 
