@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@hono/node-server':
-        specifier: ^1.13.4
-        version: 1.13.4(hono@4.6.9)
+        specifier: ^1.13.8
+        version: 1.13.8(hono@4.6.9)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -777,8 +777,8 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@hono/node-server@1.13.4':
-    resolution: {integrity: sha512-3tW9lC0+2mRmoGUEnq0d8Pi3SToWjg8flM9Z+h5Aamy23jjpiFr7n3/HLqXve6EudOsgN2tG2hZusqzNYVRmRw==}
+  '@hono/node-server@1.13.8':
+    resolution: {integrity: sha512-fsn8ucecsAXUoVxrUil0m13kOEq4mkX4/4QozCqmY+HpGfKl74OYSn8JcMA8GnG0ClfdRI4/ZSeG7zhFaVg+wg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -5486,7 +5486,7 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@hono/node-server@1.13.4(hono@4.6.9)':
+  '@hono/node-server@1.13.8(hono@4.6.9)':
     dependencies:
       hono: 4.6.9
 
